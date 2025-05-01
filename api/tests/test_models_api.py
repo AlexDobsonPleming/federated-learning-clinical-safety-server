@@ -26,8 +26,7 @@ def model(db):
     return FlModel.objects.create(
         name="TestModel",
         accuracy=0.95,
-        precision=0.90,
-        cross_validation=0.92,
+        generalisability=0.90,
         security=0.85,
     )
 
@@ -71,6 +70,5 @@ def test_get_single_model_detail(api_client, token, model):
     assert data["name"] == model.name
     # Use pytest.approx for float comparisons
     assert pytest.approx(data["accuracy"], rel=1e-3) == model.accuracy
-    assert pytest.approx(data["precision"], rel=1e-3) == model.precision
-    assert pytest.approx(data["cross_validation"], rel=1e-3) == model.cross_validation
+    assert pytest.approx(data["generalisability"], rel=1e-3) == model.generalisability
     assert pytest.approx(data["security"], rel=1e-3) == model.security

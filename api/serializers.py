@@ -4,4 +4,4 @@ from .models import FlModel
 class ModelMetricSerializer(serializers.ModelSerializer):
     class Meta:
         model  = FlModel
-        fields = ['id', 'name', 'accuracy', 'precision', 'cross_validation', 'security']
+        fields = ['id', 'name', 'accuracy', 'generalisability', 'security']

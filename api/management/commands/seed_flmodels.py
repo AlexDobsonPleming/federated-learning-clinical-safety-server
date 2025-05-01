@@ -1,19 +1,21 @@
 from django.core.management.base import BaseCommand
-
 from api.models import FlModel
 
-
 class Command(BaseCommand):
-    help = 'Seed database with initial FlModel data'
+    help = 'Seed database: leave only one FlModel entry'
 
     def handle(self, *args, **options):
-        data = [
-            {"name": "Model A", "accuracy": 0.90, "precision": 0.88, "cross_validation": 0.85, "security": 0.95},
-            {"name": "Model B", "accuracy": 0.85, "precision": 0.80, "cross_validation": 0.82, "security": 0.90},
-            {"name": "Model C", "accuracy": 0.78, "precision": 0.75, "cross_validation": 0.70, "security": 0.88},
-        ]
+        # Remove all existing entries
+        FlModel.objects.all().delete()
 
-        for entry in data:
-            FlModel.objects.update_or_create(name=entry["name"], defaults=entry)
+        # Add single seeded model
+        FlModel.objects.create(
+            name='Initial Model',
+            accuracy=0.69,
+            generalisability=0.057,
+            security=None,
+        )
 
-        self.stdout.write(self.style.SUCCESS('Successfully seeded FlModel data.'))
+        self.stdout.write(self.style.SUCCESS(
+            'Database seeded: single FlModel with accuracy=0.69, generalisability=0.057'
+        ))
