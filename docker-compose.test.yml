@@ -8,6 +8,7 @@ services:
       POSTGRES_PASSWORD: postgres
   api:
     build: .
+    entrypoint: []
     command: >
       sh -c "python manage.py migrate &&
              python manage.py seed_flmodels &&
