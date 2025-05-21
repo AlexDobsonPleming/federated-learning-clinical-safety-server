@@ -23,4 +23,8 @@ class Command(BaseCommand):
 
         print("Uploader created", flush=True)
         print(f"Username: {username}", flush=True)
+
+        with open("/tmp/uploader_token.txt", "w") as f:
+            f.write(token.key)
+
         print(f"Token: {token.key}", flush=True)
