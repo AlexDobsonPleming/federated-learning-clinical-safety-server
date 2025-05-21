@@ -1,5 +1,7 @@
 # Federated Learning Clinical Safety Server
 
+[![Tests](https://github.com/AlexDobsonPleming/federated-learning-clinical-safety-server/actions/workflows/ci.yml/badge.svg)](https://github.com/AlexDobsonPleming/federated-learning-clinical-safety-server/actions/workflows/ci.yml)
+
 This is the documentation for the Federated Learning Clinical Safety Dashboard Server! This project provides a Django REST API for managing safety statics about FL models and their local counterparts.
 
 ---
