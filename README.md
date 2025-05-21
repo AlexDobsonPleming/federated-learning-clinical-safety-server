@@ -89,3 +89,16 @@ Please follow corresponding instructions on the [front-end repository](https://g
 * `create_uploader <username>`: Create machine user with API token (no password login).
 
 ---
+
+## 🔧 API SDK
+
+An [SDK is available](https://github.com/AlexDobsonPleming/federated-learning-clinical-safety-sdk) for accessing the api in a typesafe manner.
+
+### Testing the docker integration tests
+
+The SDK is tested against this api with integration tests built with docker.
+
+Test the compose file with:
+```bash
+docker compose -f docker-compose.test.yml up -d --build
+```
