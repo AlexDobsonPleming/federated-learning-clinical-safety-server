@@ -17,19 +17,21 @@ class TestCreateUploaderCommand:
          - create a Token tied to that user
          - output SUCCESS and echo username + token
         """
-        out = io.StringIO()
-        call_command('create_uploader', 'alice', stdout=out)
+        # run the command; plain print() goes to real stdout
+        call_command('create_uploader', 'alice')
 
-        output = out.getvalue()
-        # User created
+        # capture what was printed
+        captured = capsys.readouterr().out
+
+        # verify the user
         user = User.objects.get(username='alice')
         assert not user.has_usable_password()
 
-        # Token created
+        # verify the token and output
         token = Token.objects.get(user=user)
-        assert token.key in output
-        assert "Uploader created" in output
-        assert "Username: alice" in output
+        assert token.key in captured
+        assert "Uploader created" in captured
+        assert "Username: alice" in captured
 
     def test_already_exists(self):
         """
