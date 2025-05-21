@@ -1,11 +1,89 @@
-`.\.venv\Scripts\activate.ps1`
+# Federated Learning Clinical Safety Server
 
-`python manage.py migrate`
+This is the documentation for the Federated Learning Clinical Safety Dashboard Server! This project provides a Django REST API for managing safety statics about FL models and their local counterparts.
 
-`python manage.py createsuperuser`
+---
 
-`python manage.py seed_flmodels`
+## Prerequisites
 
-run through pycharm
+Before you begin, ensure you have the following installed:
 
-run client through webstorm, they'll connect together
+* Python 3.10+
+
+---
+
+## Setup & Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone git@github.com:AlexDobsonPleming/federated-learning-clinical-safety-server.git
+   cd federated-learning-clinical-safety-server
+   ```
+
+2. Create and activate a virtual environment:
+    
+
+```powershell
+.\.venv\Scripts\activate.ps1   
+```
+
+
+```bash
+source .venv/bin/activate
+```
+
+3. Install Python dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## Database & Migrations
+
+Run migrations:
+
+```bash
+python manage.py migrate
+```
+
+---
+
+## Create Superuser
+
+```bash
+python manage.py createsuperuser
+```
+
+---
+
+## Seed Initial Data (optional: for demonstration purposes)
+
+```bash
+python manage.py seed_flmodels
+```
+
+---
+
+## Running the Server
+
+```bash
+python manage.py runserver
+```
+
+The API will be available at `http://127.0.0.1:8000/api/`
+
+---
+
+## Front-End Client
+
+Please follow corresponding instructions on the [front-end repository](https://github.com/AlexDobsonPleming/federated-learning-clinical-safety-client).
+
+## Available Management Commands
+
+* `seed_flmodels`: Seed sample FLModel data.
+* `create_uploader <username>`: Create machine user with API token (no password login).
+
+---
