@@ -1,12 +1,15 @@
 from django.urls import include, path
-from rest_framework import routers
-from rest_framework.authtoken.views import obtain_auth_token
-from .views import FlModelViewSet
+from rest_framework_nested import routers
+from .views import FlModelViewSet, LocalModelViewSet
 
 router = routers.DefaultRouter()
 router.register(r'models', FlModelViewSet)
 
+# create a nested router for /models/{model_pk}/…
+nested = routers.NestedDefaultRouter(router, r'models', lookup='model')
+nested.register(r'locals', LocalModelViewSet, basename='model-locals')
+
 urlpatterns = [
-    path('auth/token/', obtain_auth_token, name='api_token_auth'),
     path('', include(router.urls)),
+    path('', include(nested.urls)),
 ]
