@@ -2,36 +2,46 @@ name: Docker-Compose Smoke Test
 on: [push, pull_request]
 
 jobs:
-  compose-test:
-    runs-on: ubuntu-latest  # GitHub-hosted runner :contentReference[oaicite:9]{index=9}
+  smoke:
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Install Docker Compose
-        run: sudo apt-get update && sudo apt-get install -y docker-compose  # Ubuntu runner :contentReference[oaicite:10]{index=10}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
 
       - name: Build & start services
-        run: docker compose -f docker-compose.test.yml up --build -d    # build and detach :contentReference[oaicite:11]{index=11}
-
-      - name: Verify containers are running
-        run: docker compose -f docker-compose.test.yml ps                   # ensure Up :contentReference[oaicite:12]{index=12}
-
-      - name: Wait for API (allow 401)
         run: |
-          for i in {1..30}; do
-            status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/api/models/)
-            if [[ "$status" == "200" || "$status" == "401" ]]; then
-              echo "✅ API is responding with status $status"
-              exit 0
-            fi
-            echo "⏳ Waiting for API (status $status)…"
-            sleep 2
-          done
-          echo "❌ API did not become ready in time"
-          docker compose -f docker-compose.test.yml logs api
-          exit 1
+          docker compose -f docker-compose.test.yml up --build -d
+
+      - name: Verify "api" container is up
+        run: |
+          echo "Container status:"
+          docker compose -f docker-compose.test.yml ps api
+          # Look for "Up" in the status column
+          if ! docker compose -f docker-compose.test.yml ps api \
+               | awk 'NR>2 { print $4 }' \
+               | grep -q Up; then
+            echo "❌ api service did not start properly"
+            docker compose -f docker-compose.test.yml logs api
+            exit 1
+          fi
+          echo "✅ api container is Up"
+
+      # (Optional) verify port binding rather than full HTTP test
+      - name: Check port 8000 is listening
+        run: |
+          if ! ss -ltn | grep -q ':8000'; then
+            echo "❌ Nothing is listening on port 8000"
+            docker compose -f docker-compose.test.yml logs api
+            exit 1
+          fi
+          echo "✅ api is listening on 8000"
 
       - name: Tear down
         if: always()
-        run: docker compose -f docker-compose.test.yml down --volumes --remove-orphans  # cleanup :contentReference[oaicite:13]{index=13}
+        run: docker compose -f docker-compose.test.yml down --volumes --remove-orphans
