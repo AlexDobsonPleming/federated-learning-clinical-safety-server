@@ -21,6 +21,6 @@ class Command(BaseCommand):
 
         token, _ = Token.objects.get_or_create(user=user)
 
-        self.stdout.write(self.style.SUCCESS("Uploader created"))
-        self.stdout.write(f"Username: {username}")
-        self.stdout.write(f"Token: {token.key}")
+        print("Uploader created", flush=True)
+        print(f"Username: {username}", flush=True)
+        print(f"Token: {token.key}", flush=True)
