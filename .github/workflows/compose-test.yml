@@ -20,17 +20,14 @@ jobs:
 
       - name: Verify "api" container is up
         run: |
-          echo "Container status:"
-          docker compose -f docker-compose.test.yml ps api
-          # Look for "Up" in the status column
           if ! docker compose -f docker-compose.test.yml ps api \
-               | awk 'NR>2 { print $4 }' \
-               | grep -q Up; then
+               | grep -qw Up; then
             echo "❌ api service did not start properly"
             docker compose -f docker-compose.test.yml logs api
             exit 1
           fi
           echo "✅ api container is Up"
+      
 
       # (Optional) verify port binding rather than full HTTP test
       - name: Check port 8000 is listening
