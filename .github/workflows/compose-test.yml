@@ -1,50 +1,37 @@
-# .github/workflows/compose-test.yml
 name: Docker-Compose Smoke Test
-
-on:
-  push: {}
-  pull_request: {}
+on: [push, pull_request]
 
 jobs:
   compose-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # GitHub-hosted runner :contentReference[oaicite:9]{index=9}
 
     steps:
-      # 1. Check out your repository
-      - name: Checkout code
-        uses: actions/checkout@v4                       # checks out the repo for workflow access :contentReference[oaicite:0]{index=0}
+      - uses: actions/checkout@v4
 
-      # 2. Install Docker Compose (CLI v1)
       - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose         # installs compose for `docker compose` commands :contentReference[oaicite:1]{index=1}
+        run: sudo apt-get update && sudo apt-get install -y docker-compose  # Ubuntu runner :contentReference[oaicite:10]{index=10}
 
-      # 3. Build & start all services defined in docker-compose.test.yml
       - name: Build & start services
-        run: |
-          docker compose -f docker-compose.test.yml up --build -d  # build & detach :contentReference[oaicite:2]{index=2}
+        run: docker compose -f docker-compose.test.yml up --build -d    # build and detach :contentReference[oaicite:11]{index=11}
 
-      # 4. List running containers to verify they’re up
       - name: Verify containers are running
-        run: docker compose -f docker-compose.test.yml ps        # shows container status :contentReference[oaicite:3]{index=3}
+        run: docker compose -f docker-compose.test.yml ps                   # ensure Up :contentReference[oaicite:12]{index=12}
 
-      # 5. Wait for the API to respond (up to ~60s)
-      - name: Wait for API to become ready
+      - name: Wait for API (allow 401)
         run: |
           for i in {1..30}; do
-            if curl -sf http://localhost:8000/api/models/; then     # polls health of your endpoint :contentReference[oaicite:4]{index=4}
-              echo "✅ API is up!"
+            status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/api/models/)
+            if [[ "$status" == "200" || "$status" == "401" ]]; then
+              echo "✅ API is responding with status $status"
               exit 0
             fi
-            echo "⏳ Waiting for API..."
+            echo "⏳ Waiting for API (status $status)…"
             sleep 2
           done
           echo "❌ API did not become ready in time"
-          docker compose -f docker-compose.test.yml logs api       # dump logs for debugging
+          docker compose -f docker-compose.test.yml logs api
           exit 1
 
-      # 6. Tear down the stack when done/failure
       - name: Tear down
         if: always()
-        run: docker compose -f docker-compose.test.yml down --volumes --remove-orphans  # clean up :contentReference[oaicite:5]{index=5}
+        run: docker compose -f docker-compose.test.yml down --volumes --remove-orphans  # cleanup :contentReference[oaicite:13]{index=13}
