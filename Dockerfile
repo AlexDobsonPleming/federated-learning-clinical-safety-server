@@ -37,7 +37,9 @@ CMD ["gunicorn", "federated_learning_clinical_safety_server.wsgi:application", "
 COPY docker-entrypoint.sh /app/docker-entrypoint.sh
 
 # Make it executable
-RUN chmod +x /app/docker-entrypoint.sh
+RUN apt-get update && apt-get install -y dos2unix \
+    && dos2unix /app/docker-entrypoint.sh \
+    && chmod +x /app/docker-entrypoint.sh
 
 # set it as the default entrypoint—otherwise Compose’s entrypoint will override it
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
