@@ -9,7 +9,6 @@ services:
   api:
     container_name: api_test
     build: .
-    entrypoint: ["/app/docker-entrypoint.sh"]
     ports:
       - "8000:8000"
     environment:
