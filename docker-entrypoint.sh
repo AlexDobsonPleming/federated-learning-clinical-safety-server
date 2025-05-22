@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-set -e
+set -eux
 
 echo "==> applying migrations"
 python manage.py migrate
