@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-@9yj0ovhg)@ay3+k!&%1a(tc9930t=w&0j!o$u3i_g@byc@29d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'vht-dev.shef.ac.uk',
+    'loclahost'
+]
 
 
 # Application definition
@@ -107,7 +110,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
     'http://localhost:3000',        # Next.js dev server
     'https://your-production-url',  # production front end
+    'https://vht-dev.shef.ac.uk'
 ]
+
+
 
 CORS_ALLOW_CREDENTIALS=False
 

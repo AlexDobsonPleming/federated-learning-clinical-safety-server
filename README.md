@@ -41,12 +41,10 @@ Before you begin, ensure you have the following installed:
    ```
 
 2. Create and activate a virtual environment:
-    
 
-```powershell
-.\.venv\Scripts\activate.ps1   
-```
-
+```bash
+python3 -m venv .venv
+```    
 
 ```bash
 source .venv/bin/activate
