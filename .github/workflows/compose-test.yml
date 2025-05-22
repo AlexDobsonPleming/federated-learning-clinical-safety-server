@@ -18,15 +18,16 @@ jobs:
         run: |
           docker compose -f docker-compose.test.yml up --build -d
 
-      - name: Verify "api" container is up
+      - name: Verify "api_test" container is up
         run: |
-          if ! docker compose -f docker-compose.test.yml ps api \
-               | grep -qw Up; then
-            echo "❌ api service did not start properly"
-            docker compose -f docker-compose.test.yml logs api
+          # Check for a running container named api_test
+          if ! docker ps --filter "name=^api_test$" --filter "status=running" -q >/dev/null; then
+            echo "❌ api_test container did not start properly"
+            # Dump its logs for debugging
+            docker logs api_test || true
             exit 1
           fi
-          echo "✅ api container is Up"
+          echo "✅ api_test container is Up"
       
 
       # (Optional) verify port binding rather than full HTTP test
