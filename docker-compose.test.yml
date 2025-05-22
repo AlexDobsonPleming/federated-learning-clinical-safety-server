@@ -7,6 +7,5 @@ services:
       - "8000:8000"
     volumes:
       - ./:/app
-      - ./db.sqlite3:/app/db.sqlite3
 
     command: ["gunicorn", "federated_learning_clinical_safety_server.wsgi:application", "--bind", "0.0.0.0:8000"]
