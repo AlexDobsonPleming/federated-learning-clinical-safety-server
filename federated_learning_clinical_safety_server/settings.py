@@ -111,7 +111,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',        # Next.js dev server
     'https://your-production-url',  # production front end
     'https://vht-dev.shef.ac.uk',
-    'https://federated-learning-clinical-safety-client.vercel.app/'
+    'https://federated-learning-clinical-safety-client.vercel.app'
 ]
 
 
