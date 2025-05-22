@@ -1,0 +1,21 @@
+services:
+  api:
+    container_name: api_prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env.demo
+    ports:
+      - "8000:8000"
+    restart: always
+    # In production, do not bind-mount host code
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
+
+    command: ["gunicorn", "federated_learning_clinical_safety_server.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "${GUNICORN_WORKERS:-3}"]
+
+volumes:
+  static_volume:
+  media_volume:
