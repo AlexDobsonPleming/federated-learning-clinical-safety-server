@@ -2,12 +2,13 @@ from django.db import models
 
 class FlModel(models.Model):
     name = models.CharField(max_length=100)
-    accuracy = models.FloatField()
-    generalisability = models.FloatField()
-    security = models.FloatField(null=True, blank=True)
+    accuracy = models.FloatField(null=True, blank=True)
+    generalisability = models.FloatField(null=True, blank=True)
+    privacy = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.name
+
 
 class LocalModel(models.Model):
     fl_model = models.ForeignKey(
@@ -16,8 +17,9 @@ class LocalModel(models.Model):
         on_delete=models.CASCADE
     )
     name = models.CharField(max_length=100)
-    relatability = models.FloatField()
-    source = models.CharField(max_length=100)     # <-- new field
+    privacy = models.FloatField(null=True, blank=True)
+    leakage_chance = models.FloatField(null=True, blank=True)
+    noise = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.name} ({self.fl_model.name})"
+        return f"{self.name} ({self.fl_model.name})"  # e.g. "LocalA (GlobalX)"

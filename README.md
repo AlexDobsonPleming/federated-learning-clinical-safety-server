@@ -8,7 +8,7 @@ This is the documentation for the Federated Learning Clinical Safety Dashboard S
 
 ---
 
-## Deployment
+## Deployment with Docker
 
 ```bash
 docker compose -f docker-compose.demo.yml up --build --force-recreate --remove-orphans
@@ -18,9 +18,22 @@ docker-compose -f docker-compose.demo.yml up --build --force-recreate --remove-o
 ```
 
 Deploys with the default demo credentials:
-```aiignore
+```
 Username: demo
 Password: demo123
+```
+
+### HTTPS with ngrok
+
+HTTPS is necessary for secure front-end integration to prevent mixed-mode requests.
+
+This project is optimised to use ngrok for tunneling out of vht-dev.
+
+You will need to [install it from here](https://dashboard.ngrok.com/get-started/setup/linux).
+
+Once installed you can run it from:
+```bash
+nohup ./ngrok http --url=<your ngrok url> 0.0.0.0:8000 > ngrok.log 2>&1
 ```
 
 ## Development prerequisites
@@ -91,6 +104,15 @@ python manage.py runserver
 ```
 
 The API will be available at `http://127.0.0.1:8000/api/`
+
+#### Running a public server
+
+```bash
+nohup python3 manage.py runserver 0.0.0.0:8000 &
+```
+This server will bind to 0.0.0.0:8000
+
+Combined with ngrok this will make your api pubicly accessible in development mode.
 
 ---
 

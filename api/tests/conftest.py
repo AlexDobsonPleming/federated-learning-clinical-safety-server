@@ -37,5 +37,5 @@ def model(db):
         name="TestModel",
         accuracy=0.95,
         generalisability=0.90,
-        security=0.85,
+        privacy=0.85,
     )

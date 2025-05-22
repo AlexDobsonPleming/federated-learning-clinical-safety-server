@@ -30,4 +30,4 @@ class TestFlModelRead:
         assert data["name"] == model.name
         assert pytest.approx(data["accuracy"], rel=1e-3) == model.accuracy
         assert pytest.approx(data["generalisability"], rel=1e-3) == model.generalisability
-        assert pytest.approx(data["security"], rel=1e-3) == model.security
+        assert pytest.approx(data["privacy"], rel=1e-3) == model.privacy
