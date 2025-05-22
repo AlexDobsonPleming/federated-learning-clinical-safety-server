@@ -122,6 +122,7 @@ CORS_ALLOW_CREDENTIALS=False
 from corsheaders.defaults import default_headers
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'authorization',
+    "ngrok-skip-browser-warning",
 ]
 
 REST_FRAMEWORK = {
