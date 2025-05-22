@@ -23,7 +23,3 @@ RUN dos2unix /app/docker-entrypoint.sh \
 
 # This is the one and only entrypoint
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
-
-# You can still have a default CMD if you like, but your script
-# ends by exec’ing runserver, so CMD is actually ignored.
-CMD ["gunicorn", "federated_learning_clinical_safety_server.wsgi:application", "--bind", "0.0.0.0:8000"]
