@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'vht-dev.shef.ac.uk',
-    'loclahost'
+    'loclahost',
+    'wondrous-pheasant-helpful.ngrok-free.app'
 ]
 
 
