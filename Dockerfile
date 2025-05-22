@@ -32,3 +32,12 @@ ENTRYPOINT ["sh", "-c", "python manage.py migrate --noinput && exec \"$@\"", "--
 
 # 9. Default command: run the Django development server
 CMD ["gunicorn", "federated_learning_clinical_safety_server.wsgi:application", "--bind", "0.0.0.0:8000"]
+
+# Copy your entrypoint script
+COPY docker-entrypoint.sh /app/docker-entrypoint.sh
+
+# Make it executable
+RUN chmod +x /app/docker-entrypoint.sh
+
+# set it as the default entrypoint—otherwise Compose’s entrypoint will override it
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
