@@ -1,17 +1,12 @@
 # docker-compose.test.yml
 services:
-  db:
-    image: postgres:14
-    environment:
-      POSTGRES_DB: test_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
   api:
     container_name: api_test
     build: .
     ports:
       - "8000:8000"
-    environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/test_db
-    depends_on:
-      - db
+    volumes:
+      - ./:/app
+      - ./db.sqlite3:/app/db.sqlite3
+
+    command: ["gunicorn", "federated_learning_clinical_safety_server.wsgi:application", "--bind", "0.0.0.0:8000"]
