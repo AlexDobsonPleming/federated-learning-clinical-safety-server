@@ -27,4 +27,6 @@ class Command(BaseCommand):
         with open("/tmp/uploader_token.txt", "w") as f:
             f.write(token.key)
 
+        self.stdout.write(self.style.SUCCESS("Wrote token to /tmp/uploader_token.txt"))
+
         print(f"Token: {token.key}", flush=True)
