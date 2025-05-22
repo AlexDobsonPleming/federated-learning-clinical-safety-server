@@ -8,7 +8,22 @@ This is the documentation for the Federated Learning Clinical Safety Dashboard S
 
 ---
 
-## Prerequisites
+## Deployment
+
+```bash
+docker compose -f docker-compose.demo.yml up --build --force-recreate --remove-orphans
+
+#if you're on vht-dev and don't have access to modern docker
+docker-compose -f docker-compose.demo.yml up --build --force-recreate --remove-orphans
+```
+
+Deploys with the default demo credentials:
+```aiignore
+Username: demo
+Password: demo123
+```
+
+## Development prerequisites
 
 Before you begin, ensure you have the following installed:
 
