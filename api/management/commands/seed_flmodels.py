@@ -30,5 +30,5 @@ class Command(BaseCommand):
             )
 
         self.stdout.write(self.style.SUCCESS(
-            'Database seeded: 1 FlModel + 5 LocalModel entries (Site 1–5)'
+            'Database seeded: 1 FlModel + 5 LocalModel entries (Site 1 - 5)'
         ))
