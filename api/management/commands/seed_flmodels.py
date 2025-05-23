@@ -17,7 +17,7 @@ class Command(BaseCommand):
             accuracy=0.69,
             generalisability=0.057,
             privacy=None,
-            #delta=1*10-5
+            leakage_chance=None
         )
 
         epsilon_1_model = FlModel.objects.create(
@@ -25,7 +25,7 @@ class Command(BaseCommand):
             accuracy=None,
             generalisability=None,
             privacy=1,
-            # delta=1*10-5
+            leakage_chance=1 * (10 **-5),
         )
 
         # Create 2 local models based on shubham's run
@@ -50,7 +50,7 @@ class Command(BaseCommand):
             accuracy=None,
             generalisability=None,
             privacy=5,
-            # delta=1*10-5
+            leakage_chance=1 * (10 **-5),
         )
 
         LocalModel.objects.create(
@@ -74,7 +74,7 @@ class Command(BaseCommand):
             accuracy=None,
             generalisability=None,
             privacy=10,
-            # delta=1*10-5
+            leakage_chance=1 * (10 **-5),
         )
 
         LocalModel.objects.create(
@@ -98,7 +98,7 @@ class Command(BaseCommand):
             accuracy=None,
             generalisability=None,
             privacy=15,
-            # delta=1*10-5
+            leakage_chance=1 * (10 **-5),
         )
 
         LocalModel.objects.create(
