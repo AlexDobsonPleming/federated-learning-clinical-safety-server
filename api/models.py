@@ -6,6 +6,7 @@ class FlModel(models.Model):
     accuracy: Optional[float] = models.FloatField(null=True, blank=True)
     generalisability: Optional[float] = models.FloatField(null=True, blank=True)
     privacy: Optional[float] = models.FloatField(null=True, blank=True)
+    leakage_chance: Optional[float] = models.FloatField(null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
