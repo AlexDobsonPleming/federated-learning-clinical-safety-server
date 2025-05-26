@@ -14,8 +14,8 @@ class Command(BaseCommand):
 
         epsilon_3_model = FlModel.objects.create(
             name='Epsilon 3 Model',
-            accuracy=36.86,
-            generalisability=5.40,
+            accuracy=0.3686,
+            generalisability=0.0540,
             privacy=1,
             leakage_chance=1 * (10 **-5),
         )
@@ -39,8 +39,8 @@ class Command(BaseCommand):
 
         epsilon_5_model = FlModel.objects.create(
             name='Epsilon 5 Model',
-            accuracy=36.71,
-            generalisability=7.51,
+            accuracy=0.3671,
+            generalisability=0.0751,
             privacy=5,
             leakage_chance=1 * (10 **-5),
         )
@@ -63,8 +63,8 @@ class Command(BaseCommand):
 
         epsilon_10_model = FlModel.objects.create(
             name='Epsilon 10 Model',
-            accuracy=38.82,
-            generalisability=4.29,
+            accuracy=0.3882,
+            generalisability=0.0429,
             privacy=10,
             leakage_chance=1 * (10 **-5),
         )
@@ -87,8 +87,8 @@ class Command(BaseCommand):
 
         epsilon_15_model = FlModel.objects.create(
             name='Epsilon 15 Model',
-            accuracy=40.33,
-            generalisability=3.86,
+            accuracy=0.4033,
+            generalisability=0.0386,
             privacy=15,
             leakage_chance=1 * (10 **-5),
         )
