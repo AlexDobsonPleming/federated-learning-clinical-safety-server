@@ -4,7 +4,7 @@ from .models import FlModel, LocalModel
 class FlModelSerializer(serializers.ModelSerializer):
     class Meta:
         model  = FlModel
-        fields = ['id', 'name', 'accuracy', 'generalisability', 'privacy']
+        fields = ['id', 'name', 'accuracy', 'generalisability', 'privacy', 'leakage_chance']
 
 class LocalModelSerializer(serializers.ModelSerializer):
     class Meta:
