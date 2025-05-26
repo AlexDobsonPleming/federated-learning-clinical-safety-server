@@ -11,44 +11,36 @@ class Command(BaseCommand):
         LocalModel.objects.all().delete()
         FlModel.objects.all().delete()
 
-        # Create the global FL model
-        swangeese = FlModel.objects.create(
-            name='Swangeese with Transfer Learning Model',
-            accuracy=0.69,
-            generalisability=0.057,
-            privacy=None,
-            leakage_chance=None
-        )
 
-        epsilon_1_model = FlModel.objects.create(
-            name='Epsilon 1 Model',
-            accuracy=None,
-            generalisability=None,
+        epsilon_3_model = FlModel.objects.create(
+            name='Epsilon 3 Model',
+            accuracy=36.86,
+            generalisability=5.40,
             privacy=1,
             leakage_chance=1 * (10 **-5),
         )
 
         # Create 2 local models based on shubham's run
         LocalModel.objects.create(
-            fl_model=epsilon_1_model,
+            fl_model=epsilon_3_model,
             name='Site 1',
-            privacy=0.0083,
+            privacy=0.8811,
             leakage_chance=1 * (10 **-5),
-            noise=0.4073,
+            noise=0.1358,
         )
 
         LocalModel.objects.create(
-            fl_model=epsilon_1_model,
+            fl_model=epsilon_3_model,
             name=f'Site 2',
-            privacy=0.0083,
+            privacy=0.8811,
             leakage_chance=1 * (10 ** -5),
-            noise=0.6112,
+            noise=0.2037,
         )
 
         epsilon_5_model = FlModel.objects.create(
             name='Epsilon 5 Model',
-            accuracy=None,
-            generalisability=None,
+            accuracy=36.71,
+            generalisability=7.51,
             privacy=5,
             leakage_chance=1 * (10 **-5),
         )
@@ -56,7 +48,7 @@ class Command(BaseCommand):
         LocalModel.objects.create(
             fl_model=epsilon_5_model,
             name='Site 1',
-            privacy=0.0417,
+            privacy=1.5045,
             leakage_chance=1 * (10 ** -5),
             noise=0.0815,
         )
@@ -64,15 +56,15 @@ class Command(BaseCommand):
         LocalModel.objects.create(
             fl_model=epsilon_5_model,
             name=f'Site 2',
-            privacy=0.0417,
+            privacy=1.5045,
             leakage_chance=1 * (10 ** -5),
             noise=0.1222,
         )
 
         epsilon_10_model = FlModel.objects.create(
             name='Epsilon 10 Model',
-            accuracy=None,
-            generalisability=None,
+            accuracy=38.82,
+            generalisability=4.29,
             privacy=10,
             leakage_chance=1 * (10 **-5),
         )
@@ -80,7 +72,7 @@ class Command(BaseCommand):
         LocalModel.objects.create(
             fl_model=epsilon_10_model,
             name='Site 1',
-            privacy=0.0834,
+            privacy=3.1945,
             leakage_chance=1 * (10 ** -5),
             noise=0.0407,
         )
@@ -88,15 +80,15 @@ class Command(BaseCommand):
         LocalModel.objects.create(
             fl_model=epsilon_10_model,
             name=f'Site 2',
-            privacy=0.0834,
+            privacy=3.1943,
             leakage_chance=1 * (10 ** -5),
             noise=0.0611,
         )
 
         epsilon_15_model = FlModel.objects.create(
             name='Epsilon 15 Model',
-            accuracy=None,
-            generalisability=None,
+            accuracy=40.33,
+            generalisability=3.86,
             privacy=15,
             leakage_chance=1 * (10 **-5),
         )
@@ -104,7 +96,7 @@ class Command(BaseCommand):
         LocalModel.objects.create(
             fl_model=epsilon_15_model,
             name='Site 1',
-            privacy=0.1252,
+            privacy=5.0812,
             leakage_chance=1 * (10 ** -5),
             noise=0.0272,
         )
@@ -112,11 +104,11 @@ class Command(BaseCommand):
         LocalModel.objects.create(
             fl_model=epsilon_15_model,
             name=f'Site 2',
-            privacy=0.1252,
+            privacy=5.0812,
             leakage_chance=1 * (10 ** -5),
             noise=0.0407,
         )
 
         self.stdout.write(self.style.SUCCESS(
-            'Database seeded: 1 FlModel + 2 LocalModel entries'
+            'Database seeded models'
         ))
