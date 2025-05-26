@@ -13,10 +13,10 @@ class Command(BaseCommand):
 
 
         epsilon_3_model = FlModel.objects.create(
-            name='Epsilon 3 Model',
+            name='High Privacy Model',
             accuracy=0.3686,
             generalisability=0.0540,
-            privacy=1,
+            privacy=0.8811,
             leakage_chance=1 * (10 **-5),
         )
 
@@ -38,10 +38,10 @@ class Command(BaseCommand):
         )
 
         epsilon_5_model = FlModel.objects.create(
-            name='Epsilon 5 Model',
+            name='Medium Privacy Model',
             accuracy=0.3671,
             generalisability=0.0751,
-            privacy=5,
+            privacy=1.5045,
             leakage_chance=1 * (10 **-5),
         )
 
@@ -62,10 +62,10 @@ class Command(BaseCommand):
         )
 
         epsilon_10_model = FlModel.objects.create(
-            name='Epsilon 10 Model',
+            name='Weak Privacy Model',
             accuracy=0.3882,
             generalisability=0.0429,
-            privacy=10,
+            privacy=3.1945,
             leakage_chance=1 * (10 **-5),
         )
 
@@ -86,10 +86,10 @@ class Command(BaseCommand):
         )
 
         epsilon_15_model = FlModel.objects.create(
-            name='Epsilon 15 Model',
+            name='Very Weak Privacy Model',
             accuracy=0.4033,
             generalisability=0.0386,
-            privacy=15,
+            privacy=5.0812,
             leakage_chance=1 * (10 **-5),
         )
 
