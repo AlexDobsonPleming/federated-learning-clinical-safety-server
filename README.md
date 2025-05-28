@@ -4,6 +4,8 @@
 
 [![Docker-Compose Smoke Test](https://github.com/AlexDobsonPleming/federated-learning-clinical-safety-server/actions/workflows/compose-test.yml/badge.svg)](https://github.com/AlexDobsonPleming/federated-learning-clinical-safety-server/actions/workflows/compose-test.yml)
 
+[![DOI](https://zenodo.org/badge/987939823.svg)](https://doi.org/10.5281/zenodo.15521158)
+
 This is the documentation for the Federated Learning Clinical Safety Dashboard Server! This project provides a Django REST API for managing safety statics about FL models and their local counterparts.
 
 ---
